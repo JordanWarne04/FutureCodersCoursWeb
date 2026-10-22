@@ -1,4 +1,4 @@
-# Future Coders: Création de site web
+# Future Coders: Créer son site web
 
 # ⚡ JavaScript : rends ton site interactif !
 
@@ -131,7 +131,44 @@ Ajoute un bouton pour appeler cette fonction !
 
 Crée plusieurs boutons qui changent les couleurs de ton site.
 
-## 5. Afficher et cacher un élément 👀
+## 5. Modifier plusieurs éléments avec une classe 🧩
+
+Un `id` identifie un élément particulier. Une `class` peut être utilisée sur **plusieurs éléments**.
+
+Dans `index.html` :
+
+```html
+<p class="carte">Première carte</p>
+<p class="carte">Deuxième carte</p>
+<p class="carte">Troisième carte</p>
+<button onclick="colorierCartes()">Colorier les cartes</button>
+```
+
+Dans `script.js` :
+
+```javascript
+function colorierCartes() {
+    document.querySelectorAll(".carte").forEach(function(carte) {
+        carte.style.color = "red";
+        carte.style.backgroundColor = "lightyellow";
+    });
+}
+```
+
+- `document.getElementById("titre")` : trouve un élément par son **id**.
+- `document.querySelector(".carte")` : trouve **seulement le premier** élément de cette classe.
+- `document.querySelectorAll(".carte")` : trouve **tous** les éléments correspondants.
+- `.forEach(...)` : répète une action pour chacun des éléments trouvés.
+
+Le point `.` signifie « classe », comme en CSS. On peut aussi écrire `document.querySelectorAll("p.carte")` pour sélectionner seulement les paragraphes de classe `carte`.
+
+**Autre possibilité :** `document.getElementsByClassName("carte")` récupère également les éléments de cette classe, mais renvoie une collection différente, sur laquelle `forEach()` ne fonctionne pas directement.
+
+### 🎯 À essayer
+
+Ajoute une quatrième carte et vérifie qu'elle change de couleur aussi. Puis crée un bouton qui modifie **uniquement la première** carte avec `querySelector()`.
+
+## 6. Afficher et cacher un élément 👀
 
 Dans `index.html` :
 
@@ -167,7 +204,7 @@ function afficher() {
 
 Crée un bouton qui permet de cacher une image de ton site !
 
-## 6. Les variables : mémoriser des informations 📦
+## 7. Les variables : mémoriser des informations 📦
 
 Une variable permet de conserver une valeur.
 
@@ -193,7 +230,7 @@ let message = "Bonjour " + prenom;
 console.log(message);
 ```
 
-## 7. Créer un compteur 🔢
+## 8. Créer un compteur 🔢
 
 Voici un exemple qui combine variables, fonctions et HTML.
 
@@ -224,7 +261,7 @@ function ajouterPoint() {
 
 Ajoute un bouton qui remet le score à zéro.
 
-## 8. Bonus : les conditions 🤔
+## 9. Bonus : les conditions 🤔
 
 Une condition permet à JavaScript de prendre une décision.
 
@@ -244,7 +281,7 @@ if (score >= 10) {
 
 Tu peux utiliser des conditions pour créer un quiz, vérifier un mot de passe fictif ou décider du gagnant d'un jeu.
 
-## 9. Bonus : les nombres aléatoires 🎲
+## 10. Bonus : les nombres aléatoires 🎲
 
 Pour choisir un nombre au hasard entre 1 et 6 :
 
@@ -255,6 +292,90 @@ alert("Tu as obtenu : " + nombre);
 ```
 
 Tu peux utiliser ce code pour créer un dé virtuel, un tirage au sort ou un petit jeu.
+
+## 11. Bonus : dessiner dans un Canvas 🎨
+
+Un `<canvas>` est une zone de dessin dans la page HTML. JavaScript peut y dessiner des formes et les déplacer. Contrairement à un élément HTML classique, il faut **redessiner** le canvas quand le personnage bouge.
+
+Dans `index.html` :
+
+```html
+<canvas id="jeu" width="600" height="300" tabindex="0"></canvas>
+<p>Clique sur le canvas, puis utilise les flèches du clavier !</p>
+```
+
+Dans `style.css` :
+
+```css
+#jeu {
+    border: 2px solid black;
+    background: #e8f4ff;
+    max-width: 100%;
+}
+#jeu:focus { outline: 3px solid orange; }
+```
+
+Dans `script.js` :
+
+```javascript
+const canvas = document.getElementById("jeu");
+const ctx = canvas.getContext("2d");
+
+let x = 100;
+let y = 100;
+const taille = 35;
+const vitesse = 4;
+const touches = new Set();
+
+canvas.addEventListener("keydown", function(event) {
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+        event.preventDefault(); // Empêche les flèches de faire défiler la page
+        touches.add(event.key);
+    }
+});
+
+canvas.addEventListener("keyup", function(event) {
+    touches.delete(event.key);
+});
+
+canvas.addEventListener("blur", function() {
+    touches.clear();
+});
+
+function animer() {
+    if (touches.has("ArrowLeft")) x -= vitesse;
+    if (touches.has("ArrowRight")) x += vitesse;
+    if (touches.has("ArrowUp")) y -= vitesse;
+    if (touches.has("ArrowDown")) y += vitesse;
+
+    // Garder le personnage à l'intérieur du canvas
+    x = Math.max(0, Math.min(canvas.width - taille, x));
+    y = Math.max(0, Math.min(canvas.height - taille, y));
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "tomato";
+    ctx.fillRect(x, y, taille, taille);
+
+    requestAnimationFrame(animer);
+}
+
+requestAnimationFrame(animer);
+```
+
+**Comment ça fonctionne ?**
+
+- `getContext("2d")` permet de dessiner sur le canvas.
+- `fillRect(x, y, largeur, hauteur)` dessine un rectangle : ici, notre personnage.
+- `clearRect(...)` efface l'image précédente avant de redessiner.
+- `keydown` et `keyup` détectent les touches enfoncées et relâchées.
+- `requestAnimationFrame(animer)` relance le dessin à chaque image pour obtenir une animation fluide.
+- `tabindex="0"` permet au canvas de recevoir le clavier après un clic.
+
+**Important dans la présentation Reveal.js :** clique d'abord sur le canvas interactif pour lui donner le focus. Les flèches servent alors à déplacer le personnage, pas à changer de slide. Clique ailleurs pour reprendre la navigation de la présentation.
+
+### 🎯 À essayer
+
+Change la taille, la couleur ou la vitesse du personnage. Dessine un deuxième rectangle comme obstacle, ou remplace le rectangle par un cercle avec `ctx.arc()` !
 
 ## 🚀 À toi de jouer : améliore ton projet !
 
@@ -272,6 +393,7 @@ Voici quelques idées :
 | Quiz avec plusieurs réponses | ⭐⭐⭐ |
 | Jeu du nombre mystère | ⭐⭐⭐ |
 | Pierre, feuille, ciseaux | ⭐⭐⭐ |
+| Personnage qui bouge dans un Canvas | ⭐⭐⭐ |
 
 Tu peux aussi inventer ta propre interaction !
 
@@ -282,7 +404,7 @@ Si quelque chose ne fonctionne pas :
 1. Ouvre la console du navigateur avec **F12**.
 2. Vérifie les messages d'erreur.
 3. Vérifie que `script.js` est bien connecté à ton HTML.
-4. Vérifie que les noms de tes fonctions et tes `id` correspondent.
+4. Vérifie que les noms de tes fonctions, tes `id` et tes `class` correspondent.
 5. Demande de l'aide si tu es bloqué !
 
 **Le plus important : expérimente, teste tes idées et amuse-toi !** 🎉
