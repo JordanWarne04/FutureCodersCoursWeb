@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JavaScript — Donne vie à ton site !</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/monokai.css">
+<style>:root{--r-background-color:#0b1425;--r-main-color:#eaf2ff;--r-heading-color:#fff;--r-link-color:#5dd7ee;--r-selection-background-color:#ffbc56} .reveal{font-family:Arial,Helvetica,sans-serif}.reveal h1,.reveal h2{font-weight:800;text-transform:none}.reveal h1{font-size:2.25em}.reveal h2{font-size:1.55em}.reveal p,.reveal li{font-size:.77em;line-height:1.35}.reveal pre{width:100%;font-size:.54em;box-shadow:none}.reveal pre code{padding:17px;border-radius:12px;max-height:520px;background:#14243a}.reveal pre code.hljs{background:#14243a;color:#f8f8f2}.reveal pre code:not(.hljs){color:#eaf2ff}.reveal .accent{color:#5dd7ee}.reveal .warm{color:#ffbf62}.reveal .small{font-size:.58em}.reveal .cols{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}.reveal .panel{padding:20px;border-radius:14px;background:#172942;text-align:left}.reveal .tag{display:inline-block;background:#17485b;padding:6px 13px;border-radius:20px;font-size:.5em}.reveal .challenge{background:#2a2846;border-left:5px solid #ffbf62;padding:15px 20px;border-radius:8px;text-align:left;font-size:.75em}.reveal canvas{background:#f2f7ff;border-radius:12px;max-width:100%;border:2px solid #5dd7ee}.reveal button{font-size:20px;background:#5dd7ee;color:#102034;border:0;padding:12px 22px;border-radius:9px;cursor:pointer}.reveal .footer{font-size:.4em;opacity:.6;margin-top:30px}</style></head><body><div class="reveal"><div class="slides">
+<section><span class="tag">Future Coders: Créer son site web</span><h1>⚡ JavaScript</h1><h2 class="accent">Donne vie à ton site !</h2><p>Du bouton interactif au personnage qui bouge 🎮</p><p class="small">Continue ton projet HTML + CSS, et ajoute ce qui t'amuse.</p></section>
+<section><h2>Tu as déjà fait le plus gros 🏗️</h2><div class="cols"><div class="panel"><h3>HTML</h3><p>Le contenu : titres, boutons, images…</p><h3>CSS</h3><p>Le style : couleurs, positions, animations…</p></div><div class="panel"><h3 class="accent">JavaScript</h3><p>Les actions : clics, scores, surprises, jeux…</p><p>👉 Pas besoin de refaire ton site !</p></div></div></section>
+<section><h2>1. Ajoute un fichier 📁</h2><pre><code data-trim>mon-site/
+├── index.html
+├── style.css
+└── script.js    ← nouveau !</code></pre><p>À la fin de <code>index.html</code>, juste avant <code>&lt;/body&gt;</code> :</p><pre><code class="language-html" data-trim>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre></section>
+<section><h2>2. Un bouton qui parle 💬</h2><div class="cols"><div><p>Dans <strong>index.html</strong> :</p><pre><code class="language-html" data-trim>&lt;button onclick="saluer()"&gt;
+  Clique ici !
+&lt;/button&gt;</code></pre><p>Dans <strong>script.js</strong> :</p><pre><code class="language-js" data-trim>function saluer() {
+  alert("Salut ! 👋");
+}</code></pre></div><div class="panel" style="text-align:center"><button onclick="alert('Salut ! 👋')">Clique ici !</button><p class="small">Essaie le bouton dans la présentation.</p></div></div></section>
+<section><h2>Une fonction, c'est quoi ? 🔧</h2><pre><code class="language-js" data-trim>function saluer() {
+  alert("Bonjour !");
+}</code></pre><p>Une <strong>fonction</strong> est une série d'instructions qu'on peut lancer quand on veut.</p><p><code>onclick="saluer()"</code> = « au clic, lance la fonction »</p><div class="challenge">🎯 Défi : change le message et le texte du bouton.</div></section>
+<section><h2>3. Changer le texte ✏️</h2><pre><code class="language-html" data-trim>&lt;h1 id="titre"&gt;Mon site&lt;/h1&gt;
+&lt;button onclick="changerTitre()"&gt;Surprise !&lt;/button&gt;</code></pre><pre><code class="language-js" data-trim>function changerTitre() {
+  document.getElementById("titre").textContent = "Bravo 🎉";
+}</code></pre><p class="small"><code>id="titre"</code> permet à JavaScript de retrouver cet élément.</p></section>
+<section><h2>Un élément ou plusieurs ? 🔎</h2><div class="cols"><div><p><strong>Un identifiant</strong> <code>id</code> : pour un élément précis.</p><pre><code class="language-js" data-trim>document.getElementById("titre");</code></pre></div><div><p><strong>Une classe</strong> <code>class</code> : pour plusieurs éléments.</p><pre><code class="language-js" data-trim>document.querySelectorAll(".carte");</code></pre></div></div><p class="small">Attention : <code>querySelector(".carte")</code> ne sélectionne que <strong>la première</strong> carte !</p></section>
+<section><h2>Changer tous les éléments d'une classe 🎨</h2><p>Dans <strong>index.html</strong> :</p><pre><code class="language-html" data-trim>&lt;p class="carte"&gt;Carte 1&lt;/p&gt;
+&lt;p class="carte"&gt;Carte 2&lt;/p&gt;
+&lt;p class="carte"&gt;Carte 3&lt;/p&gt;
+&lt;button onclick="colorier()"&gt;Colorier !&lt;/button&gt;</code></pre><p>Dans <strong>script.js</strong> :</p><pre><code class="language-js" data-trim>function colorier() {
+  document.querySelectorAll(".carte").forEach(function(element) {
+    element.style.color = "tomato";
+  });
+}</code></pre><div class="challenge">🎯 Défi : fais changer la couleur de toutes les cartes de ton site.</div></section>
+<section><h2>Une classe, plusieurs possibilités 🧩</h2><pre><code class="language-js" data-trim>// Première carte seulement
+const premiere = document.querySelector(".carte");
+
+// Toutes les cartes
+const cartes = document.querySelectorAll(".carte");
+
+// Modifier chacune des cartes
+cartes.forEach(function(carte) {
+  carte.textContent = "Modifiée !";
+});</code></pre><p class="small">Le point <code>.</code> signifie « classe » dans un sélecteur CSS, comme dans <code>style.css</code>.</p><p class="small">Autre possibilité : <code>document.getElementsByClassName("carte")</code>, qui renvoie aussi une collection d'éléments.</p></section>
+<section><h2>4. Changer une couleur 🎨</h2><pre><code class="language-js" data-trim>function changerCouleur() {
+  document.getElementById("titre").style.color = "tomato";
+}</code></pre><p>Et pour changer le fond de toute la page :</p><pre><code class="language-js" data-trim>document.body.style.backgroundColor = "lightblue";</code></pre><div class="challenge">🎯 Défi : crée trois boutons pour choisir trois couleurs.</div></section>
+<section><h2>5. Cacher et afficher 👀</h2><pre><code class="language-html" data-trim>&lt;p id="secret"&gt;Message secret ! 🕵️&lt;/p&gt;
+&lt;button onclick="cacher()"&gt;Cacher&lt;/button&gt;
+&lt;button onclick="afficher()"&gt;Afficher&lt;/button&gt;</code></pre><pre><code class="language-js" data-trim>function cacher() {
+  document.getElementById("secret").style.display = "none";
+}
+function afficher() {
+  document.getElementById("secret").style.display = "block";
+}</code></pre></section>
+<section><h2>6. Les variables 📦</h2><pre><code class="language-js" data-trim>let score = 0;
+score = score + 1;
+console.log(score); // 1</code></pre><p>Une variable garde une information en mémoire.</p><p class="small">Ouvre <strong>F12 → Console</strong> pour voir les messages de <code>console.log()</code>.</p></section>
+<section><h2>7. Ton compteur de clics 🖱️</h2><pre><code class="language-html" data-trim>&lt;h2 id="score"&gt;0&lt;/h2&gt;
+&lt;button onclick="ajouterPoint()"&gt;+1&lt;/button&gt;</code></pre><pre><code class="language-js" data-trim>let score = 0;
+function ajouterPoint() {
+  score++;
+  document.getElementById("score").textContent = score;
+}</code></pre><div class="challenge">🎯 Défi : ajoute un bouton « remettre à zéro ».</div></section>
+<section><h2>Bonus : des décisions 🤔</h2><pre><code class="language-js" data-trim>if (score >= 10) {
+  alert("Tu as gagné ! 🏆");
+} else {
+  console.log("Encore quelques points !");
+}</code></pre><p><code>if</code> = si ; <code>else</code> = sinon.</p><p>Parfait pour les quiz et les mini-jeux.</p></section>
+<section><h2>Bonus : le hasard 🎲</h2><pre><code class="language-js" data-trim>let de = Math.floor(Math.random() * 6) + 1;
+alert("Résultat : " + de);</code></pre><p>On obtient un entier de 1 à 6.</p><div class="challenge">🎯 Défi : crée un bouton qui lance un dé virtuel.</div></section>
+<section><span class="tag">NOUVELLE POSSIBILITÉ</span><h1>🎮 Canvas 2D</h1><p>Et si tu pouvais dessiner tes propres personnages…</p><p class="accent">… puis les faire bouger ?</p></section>
+<section><h2>8. C'est quoi un canvas ? 🖼️</h2><div class="cols"><div><p>Un <code>&lt;canvas&gt;</code> est une zone de dessin dans ta page HTML.</p><p>JavaScript peut y dessiner des rectangles, cercles, images… et les redessiner pour les animer.</p></div><div><canvas id="demoDraw" width="360" height="210"></canvas></div></div><pre><code class="language-html" data-trim>&lt;canvas id="jeu" width="600" height="350"&gt;&lt;/canvas&gt;</code></pre></section>
+<section><h2>9. Dessiner un personnage 🟦</h2><pre><code class="language-js" data-trim>const canvas = document.getElementById("jeu");
+const ctx = canvas.getContext("2d");
+
+ctx.fillStyle = "royalblue";
+ctx.fillRect(40, 80, 50, 50); // x, y, largeur, hauteur</code></pre><p class="small">Le point (0, 0) est en haut à gauche. <strong>x</strong> va vers la droite, <strong>y</strong> vers le bas.</p><div class="challenge">🎯 Défi : change la couleur, la taille et la position du personnage.</div></section>
+<section><h2>10. Comment créer une animation ? 🎞️</h2><p>On efface, on déplace, puis on redessine… encore et encore !</p><pre><code class="language-js" data-trim>let x = 0;
+function animer() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "royalblue";
+  ctx.fillRect(x, 100, 50, 50);
+  x += 2;
+  requestAnimationFrame(animer);
+}
+animer();</code></pre><p class="small"><code>requestAnimationFrame()</code> demande au navigateur de dessiner la prochaine image.</p></section>
+<section><h2>Regarde, il bouge ! 🏃</h2><canvas id="demoMove" width="600" height="240"></canvas><p class="small">Le personnage est redessiné à une position différente à chaque image.</p></section>
+<section><h2>11. Bouger avec les flèches ⌨️</h2><pre><code class="language-js" data-trim>let x = 100;
+let y = 100;
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "ArrowRight") x += 10;
+  if (event.key === "ArrowLeft")  x -= 10;
+  if (event.key === "ArrowUp")    y -= 10;
+  if (event.key === "ArrowDown")  y += 10;
+});</code></pre><p>Dans la fonction d'animation, dessine ton personnage avec :</p><pre><code class="language-js" data-trim>ctx.fillRect(x, y, 50, 50);</code></pre></section>
+<section><h2>Essaie les flèches ! 🎮</h2><p class="small">Clique sur la zone de jeu puis utilise ← ↑ ↓ → (clique ailleurs pour reprendre la navigation)</p><canvas id="demoKeys" width="600" height="260" tabindex="0" style="outline-offset:4px;outline:2px dashed #5dd7ee"></canvas><p class="small">Dans ton site, tu peux remplacer le carré par un personnage dessiné ou une image.</p></section>
+<section><h2>12. Remplacer le carré par une image 🧑‍🚀</h2><pre><code class="language-js" data-trim>const personnage = new Image();
+personnage.src = "personnage.png";
+
+function animer() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (personnage.complete && personnage.naturalWidth > 0) {
+    ctx.drawImage(personnage, x, y, 60, 60);
+  }
+  requestAnimationFrame(animer);
+}
+animer();</code></pre><p class="small">Place <code>personnage.png</code> dans le même dossier. Garde aussi le code des flèches de la slide précédente.</p></section>
+<section><h2>13. Quelques idées pour ton monde 🌍</h2><div class="cols"><div class="panel"><p>🌳 Dessine un décor</p><p>🪙 Ajoute des pièces à ramasser</p><p>🐱 Fais bouger un animal</p></div><div class="panel"><p>🚀 Pilote une fusée</p><p>🏁 Crée une course</p><p>👾 Invente ton mini-jeu</p></div></div><p class="small">Tu peux aussi utiliser CSS pour déplacer des éléments HTML : Canvas est une option, pas une obligation.</p></section>
+<section><h2>À toi de créer ! 🚀</h2><p>Continue ton projet <strong>index.html + style.css</strong> et ajoute les interactions qui te plaisent.</p><div class="cols"><div class="panel"><h3>⭐ Facile</h3><p>Boutons, couleurs, messages secrets.</p></div><div class="panel"><h3>⭐⭐ Plus loin</h3><p>Compteur, quiz, dé, animations.</p></div></div><p class="warm">⭐⭐⭐ Défi : personnage animé avec Canvas et clavier.</p><p class="footer">Teste souvent • F12 → Console • Demande de l'aide • Amuse-toi !</p></section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script><script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:true,plugins:[RevealHighlight]});
+const d=document.getElementById('demoDraw').getContext('2d');d.fillStyle='#d9e9ff';d.fillRect(0,0,360,210);d.fillStyle='#58a66c';d.fillRect(0,170,360,40);d.fillStyle='#356ce3';d.fillRect(120,85,60,85);d.fillStyle='#ffd0a6';d.beginPath();d.arc(150,65,32,0,Math.PI*2);d.fill();d.fillStyle='#172942';d.fillRect(140,58,5,5);d.fillRect(156,58,5,5);
+const m=document.getElementById('demoMove'),mc=m.getContext('2d');let mx=0;function move(){mc.clearRect(0,0,m.width,m.height);mc.fillStyle='#dbeafe';mc.fillRect(0,0,m.width,m.height);mc.fillStyle='#8ac58b';mc.fillRect(0,190,m.width,50);mc.fillStyle='#356ce3';mc.fillRect(mx,140,50,50);mx=(mx+1.8)%(m.width+50);requestAnimationFrame(move)}move();
+const k=document.getElementById('demoKeys'),kc=k.getContext('2d');let kx=270,ky=105;function drawKey(){kc.fillStyle='#eaf3ff';kc.fillRect(0,0,k.width,k.height);kc.fillStyle='#c0e5c5';kc.fillRect(0,220,k.width,40);kc.fillStyle='#356ce3';kc.fillRect(kx,ky,50,50);kc.fillStyle='#fff';kc.fillRect(kx+10,ky+12,8,8);kc.fillRect(kx+32,ky+12,8,8)}drawKey();k.addEventListener('pointerdown',()=>k.focus());window.addEventListener('keydown',e=>{if(document.activeElement!==k)return;if(['ArrowRight','ArrowLeft','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation()}},true);k.addEventListener('keydown',e=>{const keys=['ArrowRight','ArrowLeft','ArrowUp','ArrowDown'];if(!keys.includes(e.key))return;e.preventDefault();if(e.key==='ArrowRight')kx+=10;if(e.key==='ArrowLeft')kx-=10;if(e.key==='ArrowUp')ky-=10;if(e.key==='ArrowDown')ky+=10;kx=Math.max(0,Math.min(k.width-50,kx));ky=Math.max(0,Math.min(k.height-50,ky));drawKey()});</script></body></html>
