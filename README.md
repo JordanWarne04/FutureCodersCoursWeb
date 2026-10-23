@@ -377,6 +377,29 @@ requestAnimationFrame(animer);
 
 Change la taille, la couleur ou la vitesse du personnage. Dessine un deuxième rectangle comme obstacle, ou remplace le rectangle par un cercle avec `ctx.arc()` !
 
+
+## 🌈 Ressources pour personnaliser ton site
+
+Tu veux rendre ton site plus original ? Voici des outils gratuits pour **créer des effets et copier directement le code HTML ou CSS** dans ton projet. Pas besoin de suivre un cours !
+
+| Ressource | Ce que tu peux ajouter à ton site |
+|---|---|
+| [CSS Gradient](https://cssgradient.io/) | Des fonds avec de beaux dégradés de couleurs |
+| [Animista](https://animista.net/) | Des animations pour les titres, images et boutons |
+| [Google Fonts](https://fonts.google.com/) | Des polices d’écriture originales |
+| [CSSmatic](https://www.cssmatic.com/) | Des ombres, bordures arrondies et dégradés |
+| [Clippy](https://bennettfeely.com/clippy/) | Des formes originales pour découper des images et blocs |
+| [CodePen](https://codepen.io/) | Des idées de boutons, galeries, animations et mini-jeux en HTML/CSS/JS |
+
+### Comment les utiliser ?
+
+1. Choisis un effet qui te plaît et personnalise-le.
+2. Copie le code proposé.
+3. Colle le **CSS** dans `style.css`, le **HTML** dans `index.html` ou le **JavaScript** dans `script.js`, selon l'exemple.
+4. Actualise ton site et adapte le résultat à ton goût !
+
+💡 **Astuce :** sur CodePen, certains exemples utilisent des bibliothèques externes. Pour commencer, choisis des exemples simples en HTML, CSS et JavaScript.
+
 ## 🚀 À toi de jouer : améliore ton projet !
 
 Tu n'as pas besoin de recommencer ton site. Continue simplement ton projet HTML/CSS et ajoute les interactions qui t'intéressent.
